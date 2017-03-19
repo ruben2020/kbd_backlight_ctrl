@@ -27,7 +27,7 @@
 #define KBD_BACKLIGHT_COMMON
 
 #define DEBUG_ON              (0)
-#define KBD_EVENTS_DEVICE     "/dev/input/event0"
+#define KBD_EVENTS_DEV_DEF    "/dev/input/event0"
 
 #if (DEBUG_ON)
 #define DEBUG_PRINT1(x)        printf(x)

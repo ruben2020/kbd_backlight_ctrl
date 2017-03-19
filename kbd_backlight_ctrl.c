@@ -38,13 +38,14 @@ void sighandler(int signum);
 void* countdown_thread(void *unused);
 void* keyevents_thread(void *unused);
 void thread_create_error(char* threadname);
-void init_timeout(void);
+void init_param(void);
 int main();
 
 int countdown;
 int timeout;
 int threads_active = 1;
 int fd;
+char* kbd_events_device;
 pthread_t thread_countdown;
 pthread_t thread_keyevents;
 pthread_mutex_t mut;
@@ -79,10 +80,10 @@ void* keyevents_thread(void *unused)
 	ssize_t rd;
 	struct input_event ev;
 
-	fd = open(KBD_EVENTS_DEVICE, O_RDONLY);
+	fd = open(kbd_events_device, O_RDONLY);
 	if (fd == -1)
 	{
-		fprintf(stderr, "ERROR: Could not open %s as read-only device. You need to be root.\n", KBD_EVENTS_DEVICE);
+		fprintf(stderr, "ERROR: Could not open %s as read-only device. You need to be root.\n", kbd_events_device);
 		exit(1);
 	}
 	do {
@@ -90,10 +91,10 @@ void* keyevents_thread(void *unused)
 		if (!threads_active) break;
 		if (rd == -1)
 		{
-			fprintf(stderr, "ERROR: Reading error for device %s\n", KBD_EVENTS_DEVICE);
+			fprintf(stderr, "ERROR: Reading error for device %s\n", kbd_events_device);
 			exit(1);
 		}
-		DEBUG_PRINT2("Read something new from %s\n", KBD_EVENTS_DEVICE);
+		DEBUG_PRINT2("Read something new from %s\n", kbd_events_device);
 		pthread_mutex_lock(&mut);
 		if (countdown < 2)
 		{
@@ -112,7 +113,7 @@ void thread_create_error(char* threadname)
 	exit(1);
 }
 
-void init_timeout(void)
+void init_param(void)
 {
 	char *s = NULL;	
 	s = getenv("KBD_BACKLIGHT_CTRL_TIMEOUT");
@@ -124,6 +125,22 @@ void init_timeout(void)
 	if ((timeout < 1) || (timeout > 3600)) timeout = 60;
 	DEBUG_PRINT2("Timeout set to %d\n", timeout);
 	countdown = timeout;
+	s = NULL;
+	s = getenv("KBD_BACKLIGHT_CTRL_INDEVICE");
+	if (s != NULL)
+	{
+		kbd_events_device = s;
+	}
+	else kbd_events_device = KBD_EVENTS_DEV_DEF;
+	if( access(kbd_events_device, R_OK) != -1 )
+	{
+		DEBUG_PRINT2("%s is readable\n", kbd_events_device);
+	}
+	else
+	{
+		fprintf(stderr, "ERROR: %s is not readable!\n", kbd_events_device);
+		exit(1);
+	}
 }
 
 int main()
@@ -134,7 +151,7 @@ int main()
 	signal(SIGINT,  sighandler);
 	signal(SIGTERM, sighandler);
 
-	init_timeout();	
+	init_param();
 	dbus_setup();
 	kbd_light_set(1);
 	pthread_mutex_init(&mut, NULL);

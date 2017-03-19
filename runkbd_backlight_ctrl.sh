@@ -4,5 +4,6 @@
 ##############################################
 export DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
 export KBD_BACKLIGHT_CTRL_TIMEOUT=3
+export KBD_BACKLIGHT_CTRL_INDEVICE=/dev/input/event0
 kbd_backlight_ctrl
 

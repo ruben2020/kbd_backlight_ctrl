@@ -12,17 +12,15 @@ The default countdown period is 20 seconds.
 This only works on Linux and has been tested on Arch Linux.
 
 For other Linux distributions, you may need to change the following:
-* `/dev/input/event0` as the keyboard input device in `kbd_backlight_common.h` 
 * The executable's binary install path of `/usr/local/bin` in Makefile and `kbd_backlight_ctrl.service`
 * The systemd .service file install path of `/usr/lib/systemd/system` in Makefile
 * The `DBUS_SESSION_BUS_ADDRESS` environment variable in `kbd_backlight_ctrl.service`
-* The DBUS dependencies in the Makefile
+* The keyboard input events device in `kbd_backlight_ctrl.service`, at the line which defines `KBD_BACKLIGHT_CTRL_INDEVICE`.
 
 You can configure the timeout period in `kbd_backlight_ctrl.service`, at the line which defines `KBD_BACKLIGHT_CTRL_TIMEOUT`.
 
 The dependencies for building are:
 * dbus
-* pthread
 
 To build and install the binary, run these commands:
 ```bash

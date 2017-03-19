@@ -6,6 +6,7 @@ After=multi-user.target
 Type=simple
 Environment=DBUS_SESSION_BUS_ADDRESS=unix:path=/var/run/dbus/system_bus_socket
 Environment=KBD_BACKLIGHT_CTRL_TIMEOUT=20
+Environment=KBD_BACKLIGHT_CTRL_INDEVICE=/dev/input/event0
 ExecStart=/usr/local/bin/kbd_backlight_ctrl
 Restart=always
 
