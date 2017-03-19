@@ -1,5 +1,6 @@
 /*
- * Copyright (C) 2017 https://github.com/ruben2020
+ * Copyright (C) 2017 ruben2020 https://github.com/ruben2020
+ * All rights reserved.
  * 
  * Redistribution and use in source and binary forms, with or without
  * modification, are permitted provided that the following conditions are met: 
