@@ -1,5 +1,5 @@
 
-CFLAGS=-Wall -I. $(shell pkg-config --cflags dbus-1)
+CFLAGS=-Wall -O1 -I. $(shell pkg-config --cflags dbus-1)
 OBJFILES=kbd_backlight_ctrl.o kbd_backlight_dbus.o
 LISTOFLIBS=-lpthread $(shell pkg-config --libs dbus-1)
 
