@@ -2,7 +2,7 @@
 CFLAGS=-Wall -I. $(shell pkg-config --cflags dbus-1)
 
 kbd_backlight_ctrl: kbd_backlight_ctrl.o kbd_backlight_dbus.o
-	$(CC) -o kbd_backlight_ctrl kbd_backlight_ctrl.o kbd_backlight_dbus.o -lpthread -ldbus-1 $(CFLAGS)
+	$(CC) -o kbd_backlight_ctrl kbd_backlight_ctrl.o kbd_backlight_dbus.o -lpthread $(shell pkg-config --libs dbus-1) $(CFLAGS)
 
 kbd_backlight_ctrl.o: kbd_backlight_ctrl.c kbd_backlight_common.h
 	$(CC) -c kbd_backlight_ctrl.c $(CFLAGS)
