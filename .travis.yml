@@ -17,8 +17,6 @@ script:
 - make
 - ls -la
 - sudo make install
-- sudo make systemd_install
-- sudo make systemd_uninstall
 - sudo make uninstall
 
 notifications:
