@@ -1,10 +1,5 @@
 /* 
- * 
- * Keyboard Backlight Control is a systemd service that turns the backlight on
- * when any key is pressed and turns it off on timeout.
- * It refreshes the countdown timer if keys are still pressed.
  * https://github.com/ruben2020/kbd_backlight_ctrl
- * 
  * 
  * Copyright (c) 2017, ruben2020 https://github.com/ruben2020
  * All rights reserved.
