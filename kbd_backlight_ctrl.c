@@ -83,6 +83,9 @@ void* keyevents_thread(void *unused)
 {
 	ssize_t rd;
 	struct input_event ev;
+#if (DEBUG_ON)
+	unsigned char uc = 0;
+#endif
 
 	fd = open(kbd_events_device, O_RDONLY);
 	if (fd == -1)
@@ -98,14 +101,17 @@ void* keyevents_thread(void *unused)
 			fprintf(stderr, "ERROR: Reading error for device %s\n", kbd_events_device);
 			exit(1);
 		}
-		DEBUG_PRINT2("Read something new from %s\n", kbd_events_device);
+		DEBUG_PRINT3("Read something new from %s       [%03d]\n", kbd_events_device, uc++);
 		pthread_mutex_lock(&mut);
 		if (countdown < 2)
 		{
 			kbd_light_set(1);
 		}
 		countdown = timeout;
-		pthread_mutex_unlock(&mut);		
+		pthread_mutex_unlock(&mut);
+		close(fd);
+		sleep(1);
+		fd = open(kbd_events_device, O_RDONLY);
 	} while(threads_active);
 	close(fd);
 	pthread_exit(NULL);
