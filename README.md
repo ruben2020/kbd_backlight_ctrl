@@ -7,7 +7,7 @@ Keyboard Backlight Control is a systemd service that turns the backlight on when
 
 It refreshes the countdown timer if keys are still pressed.
 
-The default countdown period is 20 seconds.
+The default countdown period is 60 seconds.
 
 This only works on Linux and has been tested on Arch Linux.
 
