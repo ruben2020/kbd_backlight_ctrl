@@ -110,7 +110,7 @@ void* keyevents_thread(void *unused)
 		countdown = timeout;
 		pthread_mutex_unlock(&mut);
 		close(fd);
-		sleep(1);
+		if (threads_active) sleep(1);  /* Sleep for 1 second */
 		fd = open(kbd_events_device, O_RDONLY);
 	} while(threads_active);
 	close(fd);
