@@ -35,13 +35,19 @@
 #define KBD_BACKLIGHT_TIMEOUT_DEFAULT       (60)
 
 #if (DEBUG_ON)
-#define DEBUG_PRINT1(x)        printf(x)
-#define DEBUG_PRINT2(x,y)      printf(x,y)
-#define DEBUG_PRINT3(x,y,z)    printf(x,y,z)
+
+#define DEBUG_PRINT1(x)              printf(x)
+#define DEBUG_PRINT2(x,y)            printf(x,y)
+#define DEBUG_PRINT3(x,y,z)          printf(x,y,z)
+#define DEBUG_DECL(x)                x
+
 #else
+
 #define DEBUG_PRINT1(x)
 #define DEBUG_PRINT2(x,y)
 #define DEBUG_PRINT3(x,y,z)
+#define DEBUG_DECL(x)
+
 #endif
 
 void kbd_light_set(int val);
