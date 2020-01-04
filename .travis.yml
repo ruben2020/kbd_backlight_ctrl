@@ -6,8 +6,8 @@ compiler:
 
 env:
   global:
-    # COVERITY_SCAN_TOKEN
-    - secure: "DhZECb-Y6leeWhDeFSKqkg"
+   # The next declaration is the encrypted COVERITY_SCAN_TOKEN
+   - secure: "M8wRFMPCnRLc9FKtWPROrMJgok3bHQ/bUJEV8p4EdToO5q4b7CBLyxgyZAdhF4FuLe3L+hf5z/U6UslGc904C71EewnolqVXvCoobKpmvS66zICPDQr/qFOwd1F4HFj50cB8PpnuAUVo1SIUQf9yy76bpxLwN1gREWHdx9Qg2bw="
 
 before_install:
  - uname -a
@@ -16,6 +16,7 @@ before_install:
  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
  - sudo apt-get update -qq
  - sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" install -qq dbus libdbus-1-3 libdbus-1-dev
+ - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 script: 
  - make clean
@@ -29,26 +30,12 @@ script:
 
 addons:
   coverity_scan:
-
     project:
-      name: ruben2020/kbd_backlight_ctrl
-      version: 0.1
+      name: "ruben2020/kbd_backlight_ctrl"
       description: Keyboard Backlight Control Service
-
     notification_email: ruben2020-git@users.sourceforge.net
-
-    build_command_prepend:
-     - uname -a
-     - export DEBIAN_FRONTEND=noninteractive
-     - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty universe"
-     - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
-     - sudo apt-get update -qq
-     - sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" install -qq dbus libdbus-1-3 libdbus-1-dev
-
-    build_command:
-     - make clean
-     - make
-
+    build_command_prepend: make clean
+    build_command: make
     branch_pattern: coverity_scan
 
 notifications:
