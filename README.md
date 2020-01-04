@@ -1,7 +1,8 @@
 Keyboard Backlight Control Service
 ==================================
 
-[![Build Status](https://api.travis-ci.org/ruben2020/kbd_backlight_ctrl.svg)](https://travis-ci.org/ruben2020/kbd_backlight_ctrl)
+[![Build Status](https://api.travis-ci.org/ruben2020/kbd_backlight_ctrl.svg)](https://travis-ci.org/ruben2020/kbd_backlight_ctrl) 
+[![Coverity Scan Build Status](https://scan.coverity.com/projects/20139/badge.svg)](https://scan.coverity.com/projects/ruben2020-kbd_backlight_ctrl)
 
 Keyboard Backlight Control is a systemd service that turns the backlight on when any key is pressed and turns it off on timeout.
 
