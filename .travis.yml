@@ -22,6 +22,7 @@ script:
  - make
  - ls -la
  - sudo make install
+ - ls /dev/input/*
  - sudo ./test_ci_kbd_backlight_ctrl.sh
  - sudo make uninstall
 
