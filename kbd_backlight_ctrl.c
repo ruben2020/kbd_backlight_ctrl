@@ -100,13 +100,19 @@ void* keyevents_thread(void *unused)
 	struct input_event ev;
 	struct pollfd poll_list[1];
 	char set_kbd_light = 0;
+	int rc = 0;
 	DEBUG_DECL(unsigned char uc = 0);
 
 	poll_list[0].events = POLLIN;
+	poll_list[0].fd = open_kbd_device();
 	do {
-		poll_list[0].fd = open_kbd_device();
-		DEBUG_PRINT1("Polling the input device\n");
-		if (poll(poll_list, 1, 30000) == -1) DEBUG_PRINT1("poll returned error\n");
+		rc = 0;
+		while ((threads_active) && (rc == 0))
+		{
+			DEBUG_PRINT1("Polling the input device\n");
+			rc = poll(poll_list, 1, 2000);
+		}
+		DEBUG_DECL(if (rc == -1) DEBUG_PRINT1("poll returned error\n");)
 		if((threads_active) && ((poll_list[0].revents & POLLIN) == POLLIN))
 		{
 			rd = read(fd, &ev, sizeof(struct input_event));
@@ -132,7 +138,9 @@ void* keyevents_thread(void *unused)
 			}
 		}
 		close(fd);
-		if (threads_active) sleep(1); /* Sleep for 1 second */
+		if (!threads_active) break;
+		sleep(1); /* Sleep for 1 second */
+		poll_list[0].fd = open_kbd_device();
 	} while(threads_active);
 	pthread_exit(NULL);
 }

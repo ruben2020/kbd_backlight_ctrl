@@ -30,7 +30,9 @@
 #ifndef KBD_BACKLIGHT_COMMON_H
 #define KBD_BACKLIGHT_COMMON_H
 
+#ifndef DEBUG_ON
 #define DEBUG_ON                            (0)
+#endif
 #define KBD_EVENTS_DEVICE_DEFAULT          "/dev/input/event4"
 #define KBD_BACKLIGHT_TIMEOUT_DEFAULT       (60)
 
