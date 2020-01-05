@@ -2,13 +2,12 @@ language: c
 
 compiler: 
 - gcc
-- clang
 
 env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "Xf+fx/+IhTPATaHdMi0IPv/0F/4rBrOTRAdwxX0BsYV12ukoQracHUPbJj8KOvpnkVfsAG6mZmFZggVyvYhAUd6UBoxk0JUZDW0DMIbuXBTFciGv+Cq0LnGx+IBlBoSvUz+U6/zKTJ6ZBoN9GwUGPJ50t8BgGitBAWCKgSQMiUE="
+   - secure: "U9/3s1slmg85g9MiUWUTt/xu+EP90468wrDJNtUw8XDuq6O7PXMTDGqePkdCNxnoyF7xrUsd3gca55Cfy/q+dZcxyERjaTr5rnt1D4b3EoGGLfyLJoVWcdfgdyN3nBHO24PFm3+Ikq4iXCKY/HmdOplISyuYzoZ6CVXzuSZTLMA="
 
 before_install:
  - uname -a
