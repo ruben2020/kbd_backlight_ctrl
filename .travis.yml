@@ -8,7 +8,7 @@ env:
   global:
    # The next declaration is the encrypted COVERITY_SCAN_TOKEN, created
    #   via the "travis encrypt" command using the project repo's public key
-   - secure: "UMgnBLhiZA0/8m8H9Zf/zydL/5fCvNsr0baGWd0uhhTyb3UYTlow4fD1MLmfQinReEC+eX9KxCGvn0XEPS5yfE3RcJ1yzygV5qv2sHM6ylMtUHOc30h8xgVQgCoDn3uPt4DoUHIRjA+Bih1GLZ/dya0Q7O05O8RUU6ffWJvfotY="
+   - secure: "Xf+fx/+IhTPATaHdMi0IPv/0F/4rBrOTRAdwxX0BsYV12ukoQracHUPbJj8KOvpnkVfsAG6mZmFZggVyvYhAUd6UBoxk0JUZDW0DMIbuXBTFciGv+Cq0LnGx+IBlBoSvUz+U6/zKTJ6ZBoN9GwUGPJ50t8BgGitBAWCKgSQMiUE="
 
 before_install:
  - uname -a
@@ -17,7 +17,6 @@ before_install:
  - sudo add-apt-repository "deb http://archive.ubuntu.com/ubuntu trusty main"
  - sudo apt-get update -qq
  - sudo DEBIAN_FRONTEND=noninteractive apt-get -y -o Dpkg::Options::="--force-confdef" -o Dpkg::Options::="--force-confnew" install -qq dbus libdbus-1-3 libdbus-1-dev
- - echo -n | openssl s_client -connect https://scan.coverity.com:443 | sed -ne '/-BEGIN CERTIFICATE-/,/-END CERTIFICATE-/p' | sudo tee -a /etc/ssl/certs/ca-
 
 script: 
  - make clean
@@ -33,7 +32,7 @@ addons:
   coverity_scan:
     project:
       name: "ruben2020/kbd_backlight_ctrl"
-      description: "Keyboard Backlight Control Service"
+      description: "Build submitted via Travis CI"
     notification_email: ruben2020-git@users.sourceforge.net
     build_command_prepend: "make clean"
     build_command: "make"
