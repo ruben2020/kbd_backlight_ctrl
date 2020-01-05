@@ -33,7 +33,7 @@
 #ifndef DEBUG_ON
 #define DEBUG_ON                            (0)
 #endif
-#define KBD_EVENTS_DEVICE_DEFAULT          "/dev/input/event4"
+#define KBD_EVENTS_DEVICE_DEFAULT          "/dev/input/by-path/platform-i8042-serio-0-event-kbd"
 #define KBD_BACKLIGHT_TIMEOUT_DEFAULT       (60)
 
 #if (DEBUG_ON)

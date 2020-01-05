@@ -10,7 +10,7 @@ It refreshes the countdown timer if keys are still pressed.
 
 The default countdown period is 60 seconds.
 
-This only works on Linux and has been tested on Arch Linux.
+This only works on Linux and has been tested on Arch Linux and Ubuntu Linux.
 
 For other Linux distributions, you may need to change the following:
 * The executable's binary install path of `/usr/local/bin` in Makefile and `kbd_backlight_ctrl.service`
